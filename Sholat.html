@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuntunan Tata Cara Sholat — HPT Muhammadiyah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jade:        #1B6B5A;
+    --jade-dark:   #124d41;
+    --jade-light:  #e8f4f0;
+    --gold:        #C49A3C;
+    --gold-light:  #fdf5e1;
+    --ink:         #1a1a2e;
+    --slate:       #4a5568;
+    --mist:        #f4f7f5;
+    --white:       #ffffff;
+    --radius:      14px;
+    --shadow:      0 4px 24px rgba(27,107,90,.12);
+    --transition:  .25s cubic-bezier(.4,0,.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--mist);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--jade-dark) 0%, var(--jade) 60%, #2d8c73 100%);
+    color: var(--white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,.25);
+  }
+  .header-identity {
+    background: rgba(0,0,0,.18);
+    padding: 6px 24px;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .header-identity span { opacity: .88; }
+  .header-identity .sep { opacity: .35; }
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .header-title {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .header-title .icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .header-title h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .header-title p {
+    font-size: .72rem;
+    opacity: .75;
+    margin-top: 2px;
+  }
+
+  /* ── MODE SWITCH ── */
+  .mode-switch {
+    display: flex;
+    background: rgba(0,0,0,.2);
+    border-radius: 30px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .mode-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: .8rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .mode-btn.active {
+    background: var(--white);
+    color: var(--jade-dark);
+  }
+
+  /* ── LAYOUT ── */
+  .app-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 120px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+  }
+  .sidebar-title {
+    background: var(--jade-light);
+    padding: 14px 18px;
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--jade);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gerakan-list { list-style: none; }
+  .gerakan-list li {
+    border-bottom: 1px solid var(--mist);
+  }
+  .gerakan-list li:last-child { border-bottom: none; }
+  .gerakan-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 18px;
+    cursor: pointer;
+    transition: var(--transition);
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+  .gerakan-item:hover { background: var(--jade-light); }
+  .gerakan-item.active {
+    background: var(--jade);
+    color: var(--white);
+  }
+  .gerakan-item .num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--mist);
+    font-size: .72rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--jade);
+    transition: var(--transition);
+  }
+  .gerakan-item.active .num {
+    background: rgba(255,255,255,.25);
+    color: var(--white);
+  }
+  .gerakan-item .label {
+    font-size: .82rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .gerakan-item .check {
+    margin-left: auto;
+    font-size: .9rem;
+    opacity: 0;
+    transition: var(--transition);
+  }
+  .gerakan-item.done .check { opacity: 1; color: var(--gold); }
+  .gerakan-item.active.done .check { color: rgba(255,255,255,.8); }
+
+  /* ── MAIN CONTENT ── */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-label {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--jade);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--mist);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--jade), var(--gold));
+    border-radius: 99px;
+    transition: width .4s ease;
+  }
+  .progress-count {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+
+  /* Detail card */
+  .detail-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .detail-hero {
+    background: linear-gradient(135deg, var(--jade) 0%, #2a8c72 100%);
+    padding: 28px 28px 22px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .detail-hero::after {
+    content: '☽';
+    position: absolute;
+    right: 24px; top: 16px;
+    font-size: 5rem;
+    opacity: .08;
+    line-height: 1;
+  }
+  .detail-hero .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.18);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    margin-bottom: 10px;
+  }
+  .detail-hero h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .detail-hero p {
+    font-size: .85rem;
+    opacity: .8;
+    line-height: 1.5;
+  }
+
+  .detail-body { padding: 24px 28px; }
+
+  /* Gerakan image placeholder */
+  .gerakan-visual {
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: linear-gradient(135deg, var(--jade-light), var(--gold-light));
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    border: 2px dashed rgba(27,107,90,.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .gerakan-visual .figure-icon { font-size: 3.5rem; }
+  .gerakan-visual .img-label {
+    font-size: .75rem;
+    color: var(--jade);
+    font-weight: 600;
+    opacity: .6;
+  }
+  .gerakan-visual .video-btn {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    background: var(--jade);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .gerakan-visual .video-btn:hover { background: var(--jade-dark); }
+
+  /* Video modal area */
+  .video-embed {
+    display: none;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background: #000;
+    aspect-ratio: 16/9;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: .9rem;
+  }
+  .video-embed.show { display: flex; }
+
+  /* Bacaan section */
+  .bacaan-section {
+    border: 1px solid var(--mist);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .bacaan-header {
+    background: var(--jade-light);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bacaan-header .bac-title {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--jade);
+  }
+  .bacaan-header .sumber-tag {
+    font-size: .68rem;
+    background: var(--gold-light);
+    color: var(--gold);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 1px solid rgba(196,154,60,.2);
+  }
+
+  .bacaan-body { padding: 20px; }
+
+  .arab-text {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    line-height: 2.2;
+    text-align: right;
+    direction: rtl;
+    color: var(--jade-dark);
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--mist);
+  }
+
+  .latin-text {
+    font-style: italic;
+    color: var(--slate);
+    font-size: .9rem;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .terjemahan-text {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    font-size: .85rem;
+    color: var(--ink);
+    line-height: 1.6;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+  }
+
+  /* Audio player */
+  .audio-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--mist);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 4px;
+  }
+  .play-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--jade);
+    border: none;
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+  .play-btn:hover { background: var(--jade-dark); transform: scale(1.05); }
+  .audio-label {
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--slate);
+    flex: 1;
+  }
+  .audio-note {
+    font-size: .68rem;
+    opacity: .5;
+    font-style: italic;
+  }
+  .audio-waveform {
+    display: flex; gap: 2px; align-items: center; height: 22px;
+  }
+  .wave-bar {
+    width: 3px;
+    background: var(--jade);
+    border-radius: 2px;
+    opacity: .4;
+    animation: none;
+  }
+  .audio-player.playing .wave-bar { animation: wave .6s ease-in-out infinite alternate; }
+  .wave-bar:nth-child(1) { height: 8px;  animation-delay: 0s; }
+  .wave-bar:nth-child(2) { height: 16px; animation-delay: .1s; }
+  .wave-bar:nth-child(3) { height: 12px; animation-delay: .2s; }
+  .wave-bar:nth-child(4) { height: 20px; animation-delay: .15s; }
+  .wave-bar:nth-child(5) { height: 10px; animation-delay: .05s; }
+  @keyframes wave { to { opacity: 1; transform: scaleY(1.4); } }
+
+  /* Navigation */
+  .nav-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-top: 1px solid var(--mist);
+    background: var(--white);
+    border-radius: 0 0 var(--radius) var(--radius);
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border: 2px solid var(--jade);
+    border-radius: 30px;
+    background: none;
+    color: var(--jade);
+    font-weight: 600;
+    font-size: .85rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .nav-btn:hover { background: var(--jade); color: var(--white); }
+  .nav-btn:disabled {
+    opacity: .3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .nav-btn.primary {
+    background: var(--jade);
+    color: var(--white);
+  }
+  .nav-btn.primary:hover { background: var(--jade-dark); }
+
+  .autoplay-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 2px solid var(--gold);
+    border-radius: 30px;
+    background: none;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: .82rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .autoplay-btn.active { background: var(--gold); color: var(--white); }
+  .autoplay-btn:hover { background: var(--gold); color: var(--white); }
+
+  /* ── MODE ANAK ── */
+  body.mode-anak .arab-text { font-size: 1.6rem; }
+  body.mode-anak .terjemahan-text {
+    font-size: 1rem;
+    font-weight: 600;
+    background: #fff8e1;
+    border-left-color: #f59e0b;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  body.mode-anak .detail-hero {
+    background: linear-gradient(135deg, #2d8c72 0%, #3bac8a 100%);
+  }
+  body.mode-anak .detail-hero h2 { font-size: 1.3rem; }
+  body.mode-anak .gerakan-visual .figure-icon { font-size: 4.5rem; }
+  body.mode-anak .latin-text { display: none; }
+  body.mode-anak .bacaan-header .sumber-tag { display: none; }
+  body.mode-anak .anak-badge {
+    display: inline-flex;
+  }
+  .anak-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    color: #854d0e;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: .82rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  /* Toast autoplay */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--jade-dark);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: .82rem;
+    font-weight: 600;
+    z-index: 999;
+    transition: transform .3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .app-layout { grid-template-columns: 240px 1fr; }
+  }
+  @media (max-width: 768px) {
+    .app-layout {
+      grid-template-columns: 1fr;
+      padding: 12px;
+    }
+    .sidebar { position: static; }
+    .gerakan-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    .detail-hero { padding: 20px; }
+    .detail-body { padding: 16px; }
+    .arab-text { font-size: 1.6rem; }
+    .header-identity { display: none; }
+  }
+  @media (max-width: 480px) {
+    .header-main { padding: 10px 14px; }
+    .header-title h1 { font-size: .92rem; }
+    .detail-hero h2 { font-size: 1.15rem; }
+    .nav-controls { gap: 8px; padding: 14px 16px; }
+    .nav-btn { padding: 8px 16px; font-size: .78rem; }
+    .arab-text { font-size: 1.35rem; }
+    .gerakan-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Fade transition */
+  .detail-card { animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="mode-dewasa">
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-identity">
+    <span>Kelompok: <strong>[Nama Kelompok]</strong></span>
+    <span class="sep">|</span>
+    <span>Prodi: Manajemen Bisnis Syariah</span>
+    <span class="sep">|</span>
+    <span>Mata Kuliah: Pengembangan Aplikasi Web</span>
+    <span class="sep">|</span>
+    <span>Dosen: Dedy Susanto, S.Pd.I., M.M.</span>
+    <span class="sep">|</span>
+    <span>Universitas Muhammadiyah Pontianak</span>
+  </div>
+  <div class="header-main">
+    <div class="header-title">
+      <div class="icon">🕌</div>
+      <div>
+        <h1>Tuntunan Tata Cara Sholat</h1>
+        <p>Sesuai Sunnah Rasulullah ﷺ — Rujukan HPT Muhammadiyah</p>
+      </div>
+    </div>
+    <div class="mode-switch">
+      <button class="mode-btn active" onclick="setMode('dewasa')" id="btn-dewasa">👤 Dewasa</button>
+      <button class="mode-btn" onclick="setMode('anak')" id="btn-anak">🌟 Anak-anak</button>
+    </div>
+  </div>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">🕋 Urutan Gerakan Sholat</div>
+    <ul class="gerakan-list" id="gerakanList"></ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <!-- Progress -->
+    <div class="progress-bar-wrap">
+      <span class="progress-label">📿 Progress</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <span class="progress-count" id="progressCount">0 / 13</span>
+    </div>
+
+    <!-- Detail Card -->
+    <div class="detail-card" id="detailCard">
+      <!-- Rendered by JS -->
+    </div>
+  </main>
+</div>
+
+<script>
+/* ================================================================
+   DATA — Simulasi data dari database (kategori, gerakan, bacaan)
+   Sumber: HPT Muhammadiyah (Kitab Shalat)
+   ================================================================ */
+
+const DB = {
+  kelompok: {
+    nama: "[Nama Kelompok]",
+    prodi: "Manajemen Bisnis Syariah",
+    mata_kuliah: "Pengembangan Aplikasi Web",
+    dosen: "Dedy Susanto, S.Pd.I., M.M."
+  },
+
+  gerakan: [
+    {
+      id: 1, urutan: 1,
+      nama: "Berdiri Tegak (Qiyam)",
+      emoji: "🧍",
+      deskripsi: "Berdiri tegak menghadap kiblat dengan penuh ketenangan, disertai niat dalam hati untuk melaksanakan sholat.",
+      deskripsi_anak: "Berdiri tegak, pandang ke tempat sujud, niat dalam hati mau sholat! 🕌",
+      gambar_url: null,
+      video_url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      bacaan: []
+    },
+    {
+      id: 2, urutan: 2,
+      nama: "Takbiratul Ihram",
+      emoji: "🙌",
+      deskripsi: "Mengangkat kedua tangan sejajar telinga atau bahu, lalu bertakbir sebagai tanda pembuka sholat.",
+      deskripsi_anak: "Angkat dua tangan sampai sejajar telinga, lalu ucapkan Allahu Akbar! 🤲",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 1, urutan: 1,
+          judul: "Takbir Pembuka",
+          teks_arab: "اَللّٰهُ أَكْبَرُ",
+          teks_latin: "Allāhu Akbar",
+          terjemahan: "Allah Maha Besar",
+          terjemahan_anak: "Allah itu Maha Besar! 🌟",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 1"
+        }
+      ]
+    },
+    {
+      id: 3, urutan: 3,
+      nama: "Bersedekap (Iftitah)",
+      emoji: "🙏",
+      deskripsi: "Meletakkan tangan kanan di atas tangan kiri di dada, kemudian membaca doa iftitah.",
+      deskripsi_anak: "Letakkan tangan kanan di atas tangan kiri di dada, terus baca doa pembuka! 💚",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 2, urutan: 1,
+          judul: "Doa Iftitah",
+          teks_arab: "سُبْحَانَكَ اللّٰهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلٰهَ غَيْرُكَ",
+          teks_latin: "Subḥānakallāhumma wa biḥamdika wa tabārakassmuka wa ta'ālā jadduka wa lā ilāha ghairuk",
+          terjemahan: "Maha Suci Engkau ya Allah, dengan segala puji-Mu. Maha Berkah nama-Mu, Maha Tinggi kemuliaan-Mu, dan tiada Ilah selain Engkau.",
+          terjemahan_anak: "Ya Allah, Engkau Maha Suci dan Maha Terpuji! Nama-Mu Maha Berkah, hanya Engkau yang kami sembah! ✨",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 3"
+        }
+      ]
+    },
+    {
+      id: 4, urutan: 4,
+      nama: "Membaca Al-Fātihah & Surah",
+      emoji: "📖",
+      deskripsi: "Membaca Surah Al-Fātihah (wajib) kemudian dilanjutkan membaca surah atau beberapa ayat Al-Qur'an pada rakaat pertama dan kedua.",
+      deskripsi_anak: "Baca surat Al-Fatihah dulu, baru surat pendek yang sudah dihafal! 📚",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 3, urutan: 1,
+          judul: "Surah Al-Fātihah",
+          teks_arab: "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ۝ اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ ۝ الرَّحْمٰنِ الرَّحِيْمِ ۝ مٰلِكِ يَوْمِ الدِّيْنِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِيْنُ ۝ اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَ ۝ صِرَاطَ الَّذِيْنَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّاۤلِّيْنَ",
+          teks_latin: "Bismillāhirraḥmānirraḥīm. Alḥamdu lillāhi rabbil'ālamīn. Arraḥmānirraḥīm. Māliki yaumiddīn. Iyyāka na'budu wa iyyāka nasta'īn. Ihdinas-sirāṭal mustaqīm. Sirāṭalladhīna an'amta 'alaihim ghairil magḍhūbi 'alaihim wa laḍ-ḍāllīn.",
+          terjemahan: "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Segala puji bagi Allah, Tuhan seluruh alam. Yang Maha Pengasih, Maha Penyayang. Pemilik hari pembalasan. Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami mohon pertolongan. Tunjukilah kami jalan yang lurus. Yaitu jalan orang-orang yang telah Engkau beri nikmat, bukan jalan mereka yang dimurkai, dan bukan pula jalan mereka yang sesat.",
+          terjemahan_anak: "Aku minta tolong hanya kepada Allah, tunjukkan aku jalan yang benar! 🌈",
+          audio_url: null,
+          sumber: "QS. Al-Fātihah [1]: 1–7 & HPT Muhammadiyah, Kitab Shalat"
+        }
+      ]
+    },
+    {
+      id: 5, urutan: 5,
+      nama: "Rukuk",
+      emoji: "🙇",
+      deskripsi: "Membungkukkan badan hingga punggung dan kepala sejajar, kedua tangan memegang lutut, dengan thuma'ninah (tenang sejenak).",
+      deskripsi_anak: "Bungkukkan badan, pegang lutut, punggung rata seperti meja! Tenang dulu ya 🪑",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 4, urutan: 1,
+          judul: "Tasbih Rukuk",
+          teks_arab: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+          teks_latin: "Subḥāna rabbiyal-'aẓīm",
+          terjemahan: "Maha Suci Tuhanku Yang Maha Agung.",
+          terjemahan_anak: "Allah itu Maha Agung! 🌠",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 7"
+        }
+      ]
+    },
+    {
+      id: 6, urutan: 6,
+      nama: "I'tidal (Bangkit dari Rukuk)",
+      emoji: "🧍",
+      deskripsi: "Bangkit berdiri tegak dari posisi rukuk seraya mengangkat kedua tangan dan membaca doa i'tidal dengan thuma'ninah.",
+      deskripsi_anak: "Tegak kembali berdiri sambil angkat tangan dan baca doa! ⬆️",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 5, urutan: 1,
+          judul: "Doa I'tidal",
+          teks_arab: "سَمِعَ اللّٰهُ لِمَنْ حَمِدَهُ رَبَّنَا وَلَكَ الْحَمْدُ",
+          teks_latin: "Sami'allāhu liman ḥamidah. Rabbanā wa lakal-ḥamd.",
+          terjemahan: "Allah mendengar orang yang memuji-Nya. Ya Tuhan kami, bagi-Mu segala puji.",
+          terjemahan_anak: "Allah mendengar kita! Ya Allah, puji hanya buat Engkau! 👂",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 8"
+        }
+      ]
+    },
+    {
+      id: 7, urutan: 7,
+      nama: "Sujud Pertama",
+      emoji: "🤸",
+      deskripsi: "Bersujud dengan tujuh anggota badan menyentuh lantai (dahi+hidung, dua telapak tangan, dua lutut, dua ujung kaki), dengan thuma'ninah.",
+      deskripsi_anak: "Sujud! Dahi, hidung, dua tangan, dua lutut, dan ujung kaki harus nempel ke lantai ya! 🌱",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 6, urutan: 1,
+          judul: "Tasbih Sujud",
+          teks_arab: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+          teks_latin: "Subḥāna rabbiyal-a'lā",
+          terjemahan: "Maha Suci Tuhanku Yang Maha Tinggi.",
+          terjemahan_anak: "Allah itu paling tinggi derajatnya! 🏔️",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 9"
+        }
+      ]
+    },
+    {
+      id: 8, urutan: 8,
+      nama: "Duduk di Antara Dua Sujud",
+      emoji: "🧘",
+      deskripsi: "Duduk iftirāsy (kaki kiri diduduki, kaki kanan ditegakkan) di antara dua sujud sambil membaca doa.",
+      deskripsi_anak: "Duduk sebentar di antara dua sujud, baca doa! 🙏",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 7, urutan: 1,
+          judul: "Doa Duduk Antara Dua Sujud",
+          teks_arab: "رَبِّ اغْفِرْلِي وَارْحَمْنِي وَاجْبُرْنِي وَارْفَعْنِي وَارْزُقْنِي وَاهْدِنِي وَعَافِنِي وَاعْفُ عَنِّي",
+          teks_latin: "Rabbighfirlī warḥamnī wajburnī warfa'nī warzuqnī wahdinī wa'āfinī wa'fu 'annī",
+          terjemahan: "Ya Tuhanku, ampunilah aku, sayangilah aku, cukupilah aku, angkatlah derajatku, berilah aku rezeki, tunjukilah aku, sehatkanlah aku, dan maafkanlah aku.",
+          terjemahan_anak: "Ya Allah, ampuni aku, sayangi aku, beri aku rezeki, dan sehatkan aku! 💚",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 10"
+        }
+      ]
+    },
+    {
+      id: 9, urutan: 9,
+      nama: "Sujud Kedua",
+      emoji: "🤸",
+      deskripsi: "Melakukan sujud kedua dengan cara dan bacaan yang sama seperti sujud pertama, dengan thuma'ninah.",
+      deskripsi_anak: "Sujud lagi seperti tadi! Bacaannya sama ya 🌱",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 8, urutan: 1,
+          judul: "Tasbih Sujud",
+          teks_arab: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+          teks_latin: "Subḥāna rabbiyal-a'lā",
+          terjemahan: "Maha Suci Tuhanku Yang Maha Tinggi.",
+          terjemahan_anak: "Maha Suci Allah yang paling tinggi! ✨",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 9"
+        }
+      ]
+    },
+    {
+      id: 10, urutan: 10,
+      nama: "Berdiri ke Rakaat Berikutnya",
+      emoji: "⬆️",
+      deskripsi: "Bangkit berdiri untuk melanjutkan rakaat berikutnya dengan bertumpu pada ujung kaki lalu tegak berdiri.",
+      deskripsi_anak: "Bangun lagi untuk rakaat berikutnya! Kita ulangi lagi dari awal! 🔄",
+      gambar_url: null,
+      video_url: null,
+      bacaan: []
+    },
+    {
+      id: 11, urutan: 11,
+      nama: "Tasyahud Awal",
+      emoji: "🧘",
+      deskripsi: "Duduk iftirāsy pada akhir rakaat kedua (untuk sholat lebih dari dua rakaat), membaca tasyahud awal dan shalawat.",
+      deskripsi_anak: "Duduk istirahat di rakaat kedua, baca tasyahud awal! 📿",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 9, urutan: 1,
+          judul: "Tasyahud Awal",
+          teks_arab: "اَلتَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ اَلسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللّٰهِ الصَّالِحِيْنَ أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَشْهَدُ أَنَّ مُحَمَّداً رَسُوْلُ اللّٰهِ",
+          teks_latin: "Attaḥiyyātul mubārakātus-ṣalawātut-ṭayyibātu lillāh. Assalāmu 'alaika ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. Assalāmu 'alainā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Asyhadu allā ilāha illallāh wa asyhadu anna Muḥammadan rasūlullāh.",
+          terjemahan: "Segala penghormatan, keberkahan, shalawat, dan kebaikan hanya milik Allah. Semoga keselamatan, rahmat Allah, dan keberkahan-Nya tercurah kepadamu wahai Nabi. Keselamatan semoga terlimpah pada kami dan hamba-hamba Allah yang saleh. Aku bersaksi bahwa tiada Ilah selain Allah, dan aku bersaksi bahwa Muhammad adalah utusan Allah.",
+          terjemahan_anak: "Aku bersaksi tidak ada Tuhan selain Allah, dan Nabi Muhammad adalah utusan Allah! 🌙",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 12"
+        }
+      ]
+    },
+    {
+      id: 12, urutan: 12,
+      nama: "Tasyahud Akhir & Shalawat",
+      emoji: "🤲",
+      deskripsi: "Duduk tawarruk (kaki kiri dikeluarkan ke kanan di bawah kaki kanan) pada rakaat terakhir, membaca tasyahud akhir dan shalawat Ibrahimiyah.",
+      deskripsi_anak: "Duduk terakhir, baca tasyahud akhir dan shalawat untuk Nabi Muhammad ﷺ! 🌟",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 10, urutan: 1,
+          judul: "Tasyahud Akhir + Shalawat Ibrahimiyah",
+          teks_arab: "اَللّٰهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيْمَ وَعَلَى آلِ إِبْرَاهِيْمَ وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيْمَ وَعَلَى آلِ إِبْرَاهِيْمَ فِي الْعَالَمِيْنَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+          teks_latin: "Allāhumma ṣalli 'alā Muḥammadin wa 'alā āli Muḥammadin kamā ṣallaita 'alā Ibrāhīma wa 'alā āli Ibrāhīm. Wa bārik 'alā Muḥammadin wa 'alā āli Muḥammadin kamā bārakta 'alā Ibrāhīma wa 'alā āli Ibrāhīma fil-'ālamīn. Innaka ḥamīdum majīd.",
+          terjemahan: "Ya Allah, limpahkanlah shalawat kepada Nabi Muhammad dan kepada keluarga Nabi Muhammad, sebagaimana Engkau pernah melimpahkan shalawat kepada Nabi Ibrahim dan keluarganya. Limpahkanlah pula keberkahan kepada Nabi Muhammad dan keluarganya, sebagaimana Engkau memberkahi Nabi Ibrahim dan keluarganya di alam semesta. Sesungguhnya Engkau Maha Terpuji dan Maha Mulia.",
+          terjemahan_anak: "Ya Allah, berikan keselamatan kepada Nabi Muhammad dan keluarganya! ❤️",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 13"
+        }
+      ]
+    },
+    {
+      id: 13, urutan: 13,
+      nama: "Salam",
+      emoji: "👋",
+      deskripsi: "Mengakhiri sholat dengan mengucapkan salam sambil menoleh ke kanan lalu ke kiri.",
+      deskripsi_anak: "Akhiri sholat dengan salam ke kanan dan ke kiri! 👋",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 11, urutan: 1,
+          judul: "Salam Kanan",
+          teks_arab: "اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ",
+          teks_latin: "Assalāmu'alaikum wa raḥmatullāh",
+          terjemahan: "Semoga keselamatan dan rahmat Allah terlimpah kepadamu. (menoleh ke kanan)",
+          terjemahan_anak: "Keselamatan buatmu ya! (menoleh ke kanan) 😊",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 15"
+        },
+        {
+          id: 12, urutan: 2,
+          judul: "Salam Kiri",
+          teks_arab: "اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ",
+          teks_latin: "Assalāmu'alaikum wa raḥmatullāh",
+          terjemahan: "Semoga keselamatan dan rahmat Allah terlimpah kepadamu. (menoleh ke kiri)",
+          terjemahan_anak: "Keselamatan buatmu juga ya! (menoleh ke kiri) 😊",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 15"
+        }
+      ]
+    }
+  ]
+};
+
+/* ── STATE ── */
+let currentIdx = 0;
+let mode = 'dewasa';
+let done = new Set();
+let autoplayInterval = null;
+let isAutoplaying = false;
+
+/* ── INIT ── */
+function init() {
+  renderSidebar();
+  renderDetail(currentIdx);
+}
+
+/* ── SIDEBAR ── */
+function renderSidebar() {
+  const list = document.getElementById('gerakanList');
+  list.innerHTML = DB.gerakan.map((g, i) => `
+    <li>
+      <button class="gerakan-item ${i === currentIdx ? 'active' : ''} ${done.has(i) ? 'done' : ''}"
+        onclick="goto(${i})">
+        <span class="num">${g.urutan}</span>
+        <span class="label">${g.emoji} ${g.nama}</span>
+        <span class="check">✓</span>
+      </button>
+    </li>
+  `).join('');
+}
+
+/* ── DETAIL ── */
+function renderDetail(idx) {
+  const g = DB.gerakan[idx];
+  const isAnak = mode === 'anak';
+  const desc = isAnak ? g.deskripsi_anak : g.deskripsi;
+
+  const bacaanHTML = g.bacaan.length === 0
+    ? `<div style="text-align:center;padding:20px;color:var(--slate);font-size:.85rem;opacity:.7">— Tidak ada bacaan khusus —</div>`
+    : g.bacaan.map((b, bi) => renderBacaan(b, bi, isAnak)).join('');
+
+  const videoBtn = g.video_url
+    ? `<button class="video-btn" onclick="toggleVideo(this, '${g.video_url}')">▶ Tonton Video</button>`
+    : '';
+
+  document.getElementById('detailCard').innerHTML = `
+    <div class="detail-hero">
+      <div class="step-badge">Gerakan ${g.urutan} dari ${DB.gerakan.length}</div>
+      <h2>${g.emoji} ${g.nama}</h2>
+      <p>${desc}</p>
+    </div>
+    <div class="detail-body">
+      <div class="anak-badge">🌟 Mode Anak-anak — Yuk belajar sholat!</div>
+
+      <div class="gerakan-visual">
+        <div class="figure-icon">${g.emoji}</div>
+        <div class="img-label">Gambar gerakan: ${g.nama}</div>
+        ${videoBtn}
+      </div>
+
+      <div class="video-embed" id="videoEmbed"></div>
+
+      ${bacaanHTML}
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="prev()" ${idx === 0 ? 'disabled' : ''}>◀ Sebelumnya</button>
+      <button class="autoplay-btn ${isAutoplaying ? 'active' : ''}" onclick="toggleAutoplay()" id="autoplayBtn">
+        ${isAutoplaying ? '⏹ Stop Autoplay' : '▶ Autoplay'}
+      </button>
+      <button class="nav-btn primary" onclick="next()" ${idx === DB.gerakan.length - 1 ? 'disabled' : ''}>Selanjutnya ▶</button>
+    </div>
+  `;
+
+  updateProgress();
+}
+
+function renderBacaan(b, bi, isAnak) {
+  const terjemahan = isAnak && b.terjemahan_anak ? b.terjemahan_anak : b.terjemahan;
+  return `
+    <div class="bacaan-section">
+      <div class="bacaan-header">
+        <span class="bac-title">📿 ${b.judul}</span>
+        <span class="sumber-tag">📚 ${b.sumber}</span>
+      </div>
+      <div class="bacaan-body">
+        <div class="arab-text">${b.teks_arab}</div>
+        <div class="latin-text">${b.teks_latin}</div>
+        <div class="terjemahan-text">🌐 <strong>Terjemahan:</strong> ${terjemahan}</div>
+        <div class="audio-player" id="audioPlayer${bi}" onclick="toggleAudio(${bi})">
+          <button class="play-btn" id="playBtn${bi}">▶</button>
+          <div class="audio-label">
+            Audio MP3: ${b.judul}
+            <div class="audio-note">${b.audio_url ? '' : '(File audio belum diupload — letakkan MP3 di folder /audio/)'}</div>
+          </div>
+          <div class="audio-waveform">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ── NAVIGATION ── */
+function goto(idx) {
+  done.add(currentIdx);
+  currentIdx = idx;
+  renderSidebar();
+  renderDetail(idx);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function next() {
+  if (currentIdx < DB.gerakan.length - 1) goto(currentIdx + 1);
+  else {
+    done.add(currentIdx);
+    showToast('🎉 Sholat selesai! Alhamdulillah.');
+    stopAutoplay();
+    updateProgress();
+    renderSidebar();
+  }
+}
+
+function prev() {
+  if (currentIdx > 0) goto(currentIdx - 1);
+}
+
+/* ── PROGRESS ── */
+function updateProgress() {
+  const total = DB.gerakan.length;
+  const count = done.size;
+  const pct = Math.round((count / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = count + ' / ' + total;
+}
+
+/* ── AUTOPLAY ── */
+function toggleAutoplay() {
+  isAutoplaying ? stopAutoplay() : startAutoplay();
+}
+function startAutoplay() {
+  isAutoplaying = true;
+  showToast('▶ Autoplay aktif — berpindah tiap 4 detik');
+  document.getElementById('autoplayBtn').textContent = '⏹ Stop Autoplay';
+  document.getElementById('autoplayBtn').classList.add('active');
+  autoplayInterval = setInterval(() => {
+    if (currentIdx < DB.gerakan.length - 1) {
+      next();
+    } else {
+      stopAutoplay();
+      showToast('✅ Autoplay selesai!');
+    }
+  }, 4000);
+}
+function stopAutoplay() {
+  isAutoplaying = false;
+  clearInterval(autoplayInterval);
+  const btn = document.getElementById('autoplayBtn');
+  if (btn) {
+    btn.textContent = '▶ Autoplay';
+    btn.classList.remove('active');
+  }
+}
+
+/* ── VIDEO ── */
+function toggleVideo(btn, url) {
+  const embed = document.getElementById('videoEmbed');
+  if (embed.classList.contains('show')) {
+    embed.classList.remove('show');
+    embed.innerHTML = '';
+    btn.textContent = '▶ Tonton Video';
+  } else {
+    embed.innerHTML = `<iframe width="100%" height="100%" src="${url}" frameborder="0" allowfullscreen style="border-radius:10px"></iframe>`;
+    embed.classList.add('show');
+    btn.textContent = '✕ Tutup Video';
+  }
+}
+
+/* ── AUDIO (simulasi) ── */
+let playingAudio = null;
+function toggleAudio(bi) {
+  const player = document.getElementById('audioPlayer' + bi);
+  const btn = document.getElementById('playBtn' + bi);
+  if (player.classList.contains('playing')) {
+    player.classList.remove('playing');
+    btn.textContent = '▶';
+    playingAudio = null;
+  } else {
+    if (playingAudio !== null) {
+      const old = document.getElementById('audioPlayer' + playingAudio);
+      const oldBtn = document.getElementById('playBtn' + playingAudio);
+      if (old) { old.classList.remove('playing'); oldBtn.textContent = '▶'; }
+    }
+    player.classList.add('playing');
+    btn.textContent = '⏸';
+    playingAudio = bi;
+    showToast('🔊 Memutar audio bacaan… (sambungkan file MP3)');
+    setTimeout(() => {
+      if (playingAudio === bi) {
+        player.classList.remove('playing');
+        btn.textContent = '▶';
+        playingAudio = null;
+      }
+    }, 5000);
+  }
+}
+
+/* ── MODE ── */
+function setMode(m) {
+  mode = m;
+  document.body.className = 'mode-' + m;
+  document.getElementById('btn-dewasa').classList.toggle('active', m === 'dewasa');
+  document.getElementById('btn-anak').classList.toggle('active', m === 'anak');
+  renderDetail(currentIdx);
+  showToast(m === 'anak' ? '🌟 Mode Anak-anak aktif!' : '👤 Mode Dewasa aktif!');
+}
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ── START ── */
+init();
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuntunan Tata Cara Sholat — HPT Muhammadiyah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jade:        #1B6B5A;
+    --jade-dark:   #124d41;
+    --jade-light:  #e8f4f0;
+    --gold:        #C49A3C;
+    --gold-light:  #fdf5e1;
+    --ink:         #1a1a2e;
+    --slate:       #4a5568;
+    --mist:        #f4f7f5;
+    --white:       #ffffff;
+    --radius:      14px;
+    --shadow:      0 4px 24px rgba(27,107,90,.12);
+    --transition:  .25s cubic-bezier(.4,0,.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--mist);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--jade-dark) 0%, var(--jade) 60%, #2d8c73 100%);
+    color: var(--white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,.25);
+  }
+  .header-identity {
+    background: rgba(0,0,0,.18);
+    padding: 6px 24px;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .header-identity span { opacity: .88; }
+  .header-identity .sep { opacity: .35; }
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .header-title {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .header-title .icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .header-title h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .header-title p {
+    font-size: .72rem;
+    opacity: .75;
+    margin-top: 2px;
+  }
+
+  /* ── MODE SWITCH ── */
+  .mode-switch {
+    display: flex;
+    background: rgba(0,0,0,.2);
+    border-radius: 30px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .mode-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: .8rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .mode-btn.active {
+    background: var(--white);
+    color: var(--jade-dark);
+  }
+
+  /* ── LAYOUT ── */
+  .app-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 120px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+  }
+  .sidebar-title {
+    background: var(--jade-light);
+    padding: 14px 18px;
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--jade);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gerakan-list { list-style: none; }
+  .gerakan-list li {
+    border-bottom: 1px solid var(--mist);
+  }
+  .gerakan-list li:last-child { border-bottom: none; }
+  .gerakan-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 18px;
+    cursor: pointer;
+    transition: var(--transition);
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+  .gerakan-item:hover { background: var(--jade-light); }
+  .gerakan-item.active {
+    background: var(--jade);
+    color: var(--white);
+  }
+  .gerakan-item .num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--mist);
+    font-size: .72rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--jade);
+    transition: var(--transition);
+  }
+  .gerakan-item.active .num {
+    background: rgba(255,255,255,.25);
+    color: var(--white);
+  }
+  .gerakan-item .label {
+    font-size: .82rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .gerakan-item .check {
+    margin-left: auto;
+    font-size: .9rem;
+    opacity: 0;
+    transition: var(--transition);
+  }
+  .gerakan-item.done .check { opacity: 1; color: var(--gold); }
+  .gerakan-item.active.done .check { color: rgba(255,255,255,.8); }
+
+  /* ── MAIN CONTENT ── */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-label {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--jade);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--mist);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--jade), var(--gold));
+    border-radius: 99px;
+    transition: width .4s ease;
+  }
+  .progress-count {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+
+  /* Detail card */
+  .detail-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .detail-hero {
+    background: linear-gradient(135deg, var(--jade) 0%, #2a8c72 100%);
+    padding: 28px 28px 22px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .detail-hero::after {
+    content: '☽';
+    position: absolute;
+    right: 24px; top: 16px;
+    font-size: 5rem;
+    opacity: .08;
+    line-height: 1;
+  }
+  .detail-hero .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.18);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    margin-bottom: 10px;
+  }
+  .detail-hero h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .detail-hero p {
+    font-size: .85rem;
+    opacity: .8;
+    line-height: 1.5;
+  }
+
+  .detail-body { padding: 24px 28px; }
+
+  /* Gerakan image placeholder */
+  .gerakan-visual {
+    width: 100%;
+    aspect-ratio: 16/7;
+    background: linear-gradient(135deg, var(--jade-light), var(--gold-light));
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    border: 2px dashed rgba(27,107,90,.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .gerakan-visual .figure-icon { font-size: 3.5rem; }
+  .gerakan-visual .img-label {
+    font-size: .75rem;
+    color: var(--jade);
+    font-weight: 600;
+    opacity: .6;
+  }
+  .gerakan-visual .video-btn {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    background: var(--jade);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .gerakan-visual .video-btn:hover { background: var(--jade-dark); }
+
+  /* Video modal area */
+  .video-embed {
+    display: none;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background: #000;
+    aspect-ratio: 16/9;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: .9rem;
+  }
+  .video-embed.show { display: flex; }
+
+  /* Bacaan section */
+  .bacaan-section {
+    border: 1px solid var(--mist);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .bacaan-header {
+    background: var(--jade-light);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .bacaan-header .bac-title {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--jade);
+  }
+  .bacaan-header .sumber-tag {
+    font-size: .68rem;
+    background: var(--gold-light);
+    color: var(--gold);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 1px solid rgba(196,154,60,.2);
+  }
+
+  .bacaan-body { padding: 20px; }
+
+  .arab-text {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    line-height: 2.2;
+    text-align: right;
+    direction: rtl;
+    color: var(--jade-dark);
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--mist);
+  }
+
+  .latin-text {
+    font-style: italic;
+    color: var(--slate);
+    font-size: .9rem;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .terjemahan-text {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    font-size: .85rem;
+    color: var(--ink);
+    line-height: 1.6;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+  }
+
+  /* Audio player */
+  .audio-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--mist);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 4px;
+  }
+  .play-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--jade);
+    border: none;
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+  .play-btn:hover { background: var(--jade-dark); transform: scale(1.05); }
+  .audio-label {
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--slate);
+    flex: 1;
+  }
+  .audio-note {
+    font-size: .68rem;
+    opacity: .5;
+    font-style: italic;
+  }
+  .audio-waveform {
+    display: flex; gap: 2px; align-items: center; height: 22px;
+  }
+  .wave-bar {
+    width: 3px;
+    background: var(--jade);
+    border-radius: 2px;
+    opacity: .4;
+    animation: none;
+  }
+  .audio-player.playing .wave-bar { animation: wave .6s ease-in-out infinite alternate; }
+  .wave-bar:nth-child(1) { height: 8px;  animation-delay: 0s; }
+  .wave-bar:nth-child(2) { height: 16px; animation-delay: .1s; }
+  .wave-bar:nth-child(3) { height: 12px; animation-delay: .2s; }
+  .wave-bar:nth-child(4) { height: 20px; animation-delay: .15s; }
+  .wave-bar:nth-child(5) { height: 10px; animation-delay: .05s; }
+  @keyframes wave { to { opacity: 1; transform: scaleY(1.4); } }
+
+  /* Navigation */
+  .nav-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-top: 1px solid var(--mist);
+    background: var(--white);
+    border-radius: 0 0 var(--radius) var(--radius);
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border: 2px solid var(--jade);
+    border-radius: 30px;
+    background: none;
+    color: var(--jade);
+    font-weight: 600;
+    font-size: .85rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .nav-btn:hover { background: var(--jade); color: var(--white); }
+  .nav-btn:disabled {
+    opacity: .3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .nav-btn.primary {
+    background: var(--jade);
+    color: var(--white);
+  }
+  .nav-btn.primary:hover { background: var(--jade-dark); }
+
+  .autoplay-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 2px solid var(--gold);
+    border-radius: 30px;
+    background: none;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: .82rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .autoplay-btn.active { background: var(--gold); color: var(--white); }
+  .autoplay-btn:hover { background: var(--gold); color: var(--white); }
+
+  /* ── MODE ANAK ── */
+  body.mode-anak .arab-text { font-size: 1.6rem; }
+  body.mode-anak .terjemahan-text {
+    font-size: 1rem;
+    font-weight: 600;
+    background: #fff8e1;
+    border-left-color: #f59e0b;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  body.mode-anak .detail-hero {
+    background: linear-gradient(135deg, #2d8c72 0%, #3bac8a 100%);
+  }
+  body.mode-anak .detail-hero h2 { font-size: 1.3rem; }
+  body.mode-anak .gerakan-visual .figure-icon { font-size: 4.5rem; }
+  body.mode-anak .latin-text { display: none; }
+  body.mode-anak .bacaan-header .sumber-tag { display: none; }
+  body.mode-anak .anak-badge {
+    display: inline-flex;
+  }
+  .anak-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    color: #854d0e;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: .82rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  /* Toast autoplay */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--jade-dark);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: .82rem;
+    font-weight: 600;
+    z-index: 999;
+    transition: transform .3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .app-layout { grid-template-columns: 240px 1fr; }
+  }
+  @media (max-width: 768px) {
+    .app-layout {
+      grid-template-columns: 1fr;
+      padding: 12px;
+    }
+    .sidebar { position: static; }
+    .gerakan-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    .detail-hero { padding: 20px; }
+    .detail-body { padding: 16px; }
+    .arab-text { font-size: 1.6rem; }
+    .header-identity { display: none; }
+  }
+  @media (max-width: 480px) {
+    .header-main { padding: 10px 14px; }
+    .header-title h1 { font-size: .92rem; }
+    .detail-hero h2 { font-size: 1.15rem; }
+    .nav-controls { gap: 8px; padding: 14px 16px; }
+    .nav-btn { padding: 8px 16px; font-size: .78rem; }
+    .arab-text { font-size: 1.35rem; }
+    .gerakan-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Fade transition */
+  .detail-card { animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="mode-dewasa">
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-identity">
+    <span>Kelompok: <strong>[Nama Kelompok]</strong></span>
+    <span class="sep">|</span>
+    <span>Prodi: Manajemen Bisnis Syariah</span>
+    <span class="sep">|</span>
+    <span>Mata Kuliah: Pengembangan Aplikasi Web</span>
+    <span class="sep">|</span>
+    <span>Dosen: Dedy Susanto, S.Pd.I., M.M.</span>
+    <span class="sep">|</span>
+    <span>Universitas Muhammadiyah Pontianak</span>
+  </div>
+  <div class="header-main">
+    <div class="header-title">
+      <div class="icon">🕌</div>
+      <div>
+        <h1>Tuntunan Tata Cara Sholat</h1>
+        <p>Sesuai Sunnah Rasulullah ﷺ — Rujukan HPT Muhammadiyah</p>
+      </div>
+    </div>
+    <div class="mode-switch">
+      <button class="mode-btn active" onclick="setMode('dewasa')" id="btn-dewasa">👤 Dewasa</button>
+      <button class="mode-btn" onclick="setMode('anak')" id="btn-anak">🌟 Anak-anak</button>
+    </div>
+  </div>
+</header>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">🕋 Urutan Gerakan Sholat</div>
+    <ul class="gerakan-list" id="gerakanList"></ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <!-- Progress -->
+    <div class="progress-bar-wrap">
+      <span class="progress-label">📿 Progress</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <span class="progress-count" id="progressCount">0 / 13</span>
+    </div>
+
+    <!-- Detail Card -->
+    <div class="detail-card" id="detailCard">
+      <!-- Rendered by JS -->
+    </div>
+  </main>
+</div>
+
+<script>
+/* ================================================================
+   DATA — Simulasi data dari database (kategori, gerakan, bacaan)
+   Sumber: HPT Muhammadiyah (Kitab Shalat)
+   ================================================================ */
+
+const DB = {
+  kelompok: {
+    nama: "[Nama Kelompok]",
+    prodi: "Manajemen Bisnis Syariah",
+    mata_kuliah: "Pengembangan Aplikasi Web",
+    dosen: "Dedy Susanto, S.Pd.I., M.M."
+  },
+
+  gerakan: [
+    {
+      id: 1, urutan: 1,
+      nama: "Berdiri Tegak (Qiyam)",
+      emoji: "🧍",
+      deskripsi: "Berdiri tegak menghadap kiblat dengan penuh ketenangan, disertai niat dalam hati untuk melaksanakan sholat.",
+      deskripsi_anak: "Berdiri tegak, pandang ke tempat sujud, niat dalam hati mau sholat! 🕌",
+      gambar_url: null,
+      video_url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      bacaan: []
+    },
+    {
+      id: 2, urutan: 2,
+      nama: "Takbiratul Ihram",
+      emoji: "🙌",
+      deskripsi: "Mengangkat kedua tangan sejajar telinga atau bahu, lalu bertakbir sebagai tanda pembuka sholat.",
+      deskripsi_anak: "Angkat dua tangan sampai sejajar telinga, lalu ucapkan Allahu Akbar! 🤲",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 1, urutan: 1,
+          judul: "Takbir Pembuka",
+          teks_arab: "اَللّٰهُ أَكْبَرُ",
+          teks_latin: "Allāhu Akbar",
+          terjemahan: "Allah Maha Besar",
+          terjemahan_anak: "Allah itu Maha Besar! 🌟",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 1"
+        }
+      ]
+    },
+    {
+      id: 3, urutan: 3,
+      nama: "Bersedekap (Iftitah)",
+      emoji: "🙏",
+      deskripsi: "Meletakkan tangan kanan di atas tangan kiri di dada, kemudian membaca doa iftitah.",
+      deskripsi_anak: "Letakkan tangan kanan di atas tangan kiri di dada, terus baca doa pembuka! 💚",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 2, urutan: 1,
+          judul: "Doa Iftitah",
+          teks_arab: "سُبْحَانَكَ اللّٰهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلٰهَ غَيْرُكَ",
+          teks_latin: "Subḥānakallāhumma wa biḥamdika wa tabārakassmuka wa ta'ālā jadduka wa lā ilāha ghairuk",
+          terjemahan: "Maha Suci Engkau ya Allah, dengan segala puji-Mu. Maha Berkah nama-Mu, Maha Tinggi kemuliaan-Mu, dan tiada Ilah selain Engkau.",
+          terjemahan_anak: "Ya Allah, Engkau Maha Suci dan Maha Terpuji! Nama-Mu Maha Berkah, hanya Engkau yang kami sembah! ✨",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 3"
+        }
+      ]
+    },
+    {
+      id: 4, urutan: 4,
+      nama: "Membaca Al-Fātihah & Surah",
+      emoji: "📖",
+      deskripsi: "Membaca Surah Al-Fātihah (wajib) kemudian dilanjutkan membaca surah atau beberapa ayat Al-Qur'an pada rakaat pertama dan kedua.",
+      deskripsi_anak: "Baca surat Al-Fatihah dulu, baru surat pendek yang sudah dihafal! 📚",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 3, urutan: 1,
+          judul: "Surah Al-Fātihah",
+          teks_arab: "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ۝ اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ ۝ الرَّحْمٰنِ الرَّحِيْمِ ۝ مٰلِكِ يَوْمِ الدِّيْنِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِيْنُ ۝ اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَ ۝ صِرَاطَ الَّذِيْنَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّاۤلِّيْنَ",
+          teks_latin: "Bismillāhirraḥmānirraḥīm. Alḥamdu lillāhi rabbil'ālamīn. Arraḥmānirraḥīm. Māliki yaumiddīn. Iyyāka na'budu wa iyyāka nasta'īn. Ihdinas-sirāṭal mustaqīm. Sirāṭalladhīna an'amta 'alaihim ghairil magḍhūbi 'alaihim wa laḍ-ḍāllīn.",
+          terjemahan: "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Segala puji bagi Allah, Tuhan seluruh alam. Yang Maha Pengasih, Maha Penyayang. Pemilik hari pembalasan. Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami mohon pertolongan. Tunjukilah kami jalan yang lurus. Yaitu jalan orang-orang yang telah Engkau beri nikmat, bukan jalan mereka yang dimurkai, dan bukan pula jalan mereka yang sesat.",
+          terjemahan_anak: "Aku minta tolong hanya kepada Allah, tunjukkan aku jalan yang benar! 🌈",
+          audio_url: null,
+          sumber: "QS. Al-Fātihah [1]: 1–7 & HPT Muhammadiyah, Kitab Shalat"
+        }
+      ]
+    },
+    {
+      id: 5, urutan: 5,
+      nama: "Rukuk",
+      emoji: "🙇",
+      deskripsi: "Membungkukkan badan hingga punggung dan kepala sejajar, kedua tangan memegang lutut, dengan thuma'ninah (tenang sejenak).",
+      deskripsi_anak: "Bungkukkan badan, pegang lutut, punggung rata seperti meja! Tenang dulu ya 🪑",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 4, urutan: 1,
+          judul: "Tasbih Rukuk",
+          teks_arab: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+          teks_latin: "Subḥāna rabbiyal-'aẓīm",
+          terjemahan: "Maha Suci Tuhanku Yang Maha Agung.",
+          terjemahan_anak: "Allah itu Maha Agung! 🌠",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 7"
+        }
+      ]
+    },
+    {
+      id: 6, urutan: 6,
+      nama: "I'tidal (Bangkit dari Rukuk)",
+      emoji: "🧍",
+      deskripsi: "Bangkit berdiri tegak dari posisi rukuk seraya mengangkat kedua tangan dan membaca doa i'tidal dengan thuma'ninah.",
+      deskripsi_anak: "Tegak kembali berdiri sambil angkat tangan dan baca doa! ⬆️",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 5, urutan: 1,
+          judul: "Doa I'tidal",
+          teks_arab: "سَمِعَ اللّٰهُ لِمَنْ حَمِدَهُ رَبَّنَا وَلَكَ الْحَمْدُ",
+          teks_latin: "Sami'allāhu liman ḥamidah. Rabbanā wa lakal-ḥamd.",
+          terjemahan: "Allah mendengar orang yang memuji-Nya. Ya Tuhan kami, bagi-Mu segala puji.",
+          terjemahan_anak: "Allah mendengar kita! Ya Allah, puji hanya buat Engkau! 👂",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 8"
+        }
+      ]
+    },
+    {
+      id: 7, urutan: 7,
+      nama: "Sujud Pertama",
+      emoji: "🤸",
+      deskripsi: "Bersujud dengan tujuh anggota badan menyentuh lantai (dahi+hidung, dua telapak tangan, dua lutut, dua ujung kaki), dengan thuma'ninah.",
+      deskripsi_anak: "Sujud! Dahi, hidung, dua tangan, dua lutut, dan ujung kaki harus nempel ke lantai ya! 🌱",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 6, urutan: 1,
+          judul: "Tasbih Sujud",
+          teks_arab: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+          teks_latin: "Subḥāna rabbiyal-a'lā",
+          terjemahan: "Maha Suci Tuhanku Yang Maha Tinggi.",
+          terjemahan_anak: "Allah itu paling tinggi derajatnya! 🏔️",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 9"
+        }
+      ]
+    },
+    {
+      id: 8, urutan: 8,
+      nama: "Duduk di Antara Dua Sujud",
+      emoji: "🧘",
+      deskripsi: "Duduk iftirāsy (kaki kiri diduduki, kaki kanan ditegakkan) di antara dua sujud sambil membaca doa.",
+      deskripsi_anak: "Duduk sebentar di antara dua sujud, baca doa! 🙏",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 7, urutan: 1,
+          judul: "Doa Duduk Antara Dua Sujud",
+          teks_arab: "رَبِّ اغْفِرْلِي وَارْحَمْنِي وَاجْبُرْنِي وَارْفَعْنِي وَارْزُقْنِي وَاهْدِنِي وَعَافِنِي وَاعْفُ عَنِّي",
+          teks_latin: "Rabbighfirlī warḥamnī wajburnī warfa'nī warzuqnī wahdinī wa'āfinī wa'fu 'annī",
+          terjemahan: "Ya Tuhanku, ampunilah aku, sayangilah aku, cukupilah aku, angkatlah derajatku, berilah aku rezeki, tunjukilah aku, sehatkanlah aku, dan maafkanlah aku.",
+          terjemahan_anak: "Ya Allah, ampuni aku, sayangi aku, beri aku rezeki, dan sehatkan aku! 💚",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 10"
+        }
+      ]
+    },
+    {
+      id: 9, urutan: 9,
+      nama: "Sujud Kedua",
+      emoji: "🤸",
+      deskripsi: "Melakukan sujud kedua dengan cara dan bacaan yang sama seperti sujud pertama, dengan thuma'ninah.",
+      deskripsi_anak: "Sujud lagi seperti tadi! Bacaannya sama ya 🌱",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 8, urutan: 1,
+          judul: "Tasbih Sujud",
+          teks_arab: "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+          teks_latin: "Subḥāna rabbiyal-a'lā",
+          terjemahan: "Maha Suci Tuhanku Yang Maha Tinggi.",
+          terjemahan_anak: "Maha Suci Allah yang paling tinggi! ✨",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 9"
+        }
+      ]
+    },
+    {
+      id: 10, urutan: 10,
+      nama: "Berdiri ke Rakaat Berikutnya",
+      emoji: "⬆️",
+      deskripsi: "Bangkit berdiri untuk melanjutkan rakaat berikutnya dengan bertumpu pada ujung kaki lalu tegak berdiri.",
+      deskripsi_anak: "Bangun lagi untuk rakaat berikutnya! Kita ulangi lagi dari awal! 🔄",
+      gambar_url: null,
+      video_url: null,
+      bacaan: []
+    },
+    {
+      id: 11, urutan: 11,
+      nama: "Tasyahud Awal",
+      emoji: "🧘",
+      deskripsi: "Duduk iftirāsy pada akhir rakaat kedua (untuk sholat lebih dari dua rakaat), membaca tasyahud awal dan shalawat.",
+      deskripsi_anak: "Duduk istirahat di rakaat kedua, baca tasyahud awal! 📿",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 9, urutan: 1,
+          judul: "Tasyahud Awal",
+          teks_arab: "اَلتَّحِيَّاتُ الْمُبَارَكَاتُ الصَّلَوَاتُ الطَّيِّبَاتُ لِلّٰهِ اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللّٰهِ وَبَرَكَاتُهُ اَلسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللّٰهِ الصَّالِحِيْنَ أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَشْهَدُ أَنَّ مُحَمَّداً رَسُوْلُ اللّٰهِ",
+          teks_latin: "Attaḥiyyātul mubārakātus-ṣalawātut-ṭayyibātu lillāh. Assalāmu 'alaika ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh. Assalāmu 'alainā wa 'alā 'ibādillāhiṣ-ṣāliḥīn. Asyhadu allā ilāha illallāh wa asyhadu anna Muḥammadan rasūlullāh.",
+          terjemahan: "Segala penghormatan, keberkahan, shalawat, dan kebaikan hanya milik Allah. Semoga keselamatan, rahmat Allah, dan keberkahan-Nya tercurah kepadamu wahai Nabi. Keselamatan semoga terlimpah pada kami dan hamba-hamba Allah yang saleh. Aku bersaksi bahwa tiada Ilah selain Allah, dan aku bersaksi bahwa Muhammad adalah utusan Allah.",
+          terjemahan_anak: "Aku bersaksi tidak ada Tuhan selain Allah, dan Nabi Muhammad adalah utusan Allah! 🌙",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 12"
+        }
+      ]
+    },
+    {
+      id: 12, urutan: 12,
+      nama: "Tasyahud Akhir & Shalawat",
+      emoji: "🤲",
+      deskripsi: "Duduk tawarruk (kaki kiri dikeluarkan ke kanan di bawah kaki kanan) pada rakaat terakhir, membaca tasyahud akhir dan shalawat Ibrahimiyah.",
+      deskripsi_anak: "Duduk terakhir, baca tasyahud akhir dan shalawat untuk Nabi Muhammad ﷺ! 🌟",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 10, urutan: 1,
+          judul: "Tasyahud Akhir + Shalawat Ibrahimiyah",
+          teks_arab: "اَللّٰهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيْمَ وَعَلَى آلِ إِبْرَاهِيْمَ وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيْمَ وَعَلَى آلِ إِبْرَاهِيْمَ فِي الْعَالَمِيْنَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+          teks_latin: "Allāhumma ṣalli 'alā Muḥammadin wa 'alā āli Muḥammadin kamā ṣallaita 'alā Ibrāhīma wa 'alā āli Ibrāhīm. Wa bārik 'alā Muḥammadin wa 'alā āli Muḥammadin kamā bārakta 'alā Ibrāhīma wa 'alā āli Ibrāhīma fil-'ālamīn. Innaka ḥamīdum majīd.",
+          terjemahan: "Ya Allah, limpahkanlah shalawat kepada Nabi Muhammad dan kepada keluarga Nabi Muhammad, sebagaimana Engkau pernah melimpahkan shalawat kepada Nabi Ibrahim dan keluarganya. Limpahkanlah pula keberkahan kepada Nabi Muhammad dan keluarganya, sebagaimana Engkau memberkahi Nabi Ibrahim dan keluarganya di alam semesta. Sesungguhnya Engkau Maha Terpuji dan Maha Mulia.",
+          terjemahan_anak: "Ya Allah, berikan keselamatan kepada Nabi Muhammad dan keluarganya! ❤️",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 13"
+        }
+      ]
+    },
+    {
+      id: 13, urutan: 13,
+      nama: "Salam",
+      emoji: "👋",
+      deskripsi: "Mengakhiri sholat dengan mengucapkan salam sambil menoleh ke kanan lalu ke kiri.",
+      deskripsi_anak: "Akhiri sholat dengan salam ke kanan dan ke kiri! 👋",
+      gambar_url: null,
+      video_url: null,
+      bacaan: [
+        {
+          id: 11, urutan: 1,
+          judul: "Salam Kanan",
+          teks_arab: "اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ",
+          teks_latin: "Assalāmu'alaikum wa raḥmatullāh",
+          terjemahan: "Semoga keselamatan dan rahmat Allah terlimpah kepadamu. (menoleh ke kanan)",
+          terjemahan_anak: "Keselamatan buatmu ya! (menoleh ke kanan) 😊",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 15"
+        },
+        {
+          id: 12, urutan: 2,
+          judul: "Salam Kiri",
+          teks_arab: "اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ",
+          teks_latin: "Assalāmu'alaikum wa raḥmatullāh",
+          terjemahan: "Semoga keselamatan dan rahmat Allah terlimpah kepadamu. (menoleh ke kiri)",
+          terjemahan_anak: "Keselamatan buatmu juga ya! (menoleh ke kiri) 😊",
+          audio_url: null,
+          sumber: "HPT Muhammadiyah, Kitab Shalat, hlm. 15"
+        }
+      ]
+    }
+  ]
+};
+
+/* ── STATE ── */
+let currentIdx = 0;
+let mode = 'dewasa';
+let done = new Set();
+let autoplayInterval = null;
+let isAutoplaying = false;
+
+/* ── INIT ── */
+function init() {
+  renderSidebar();
+  renderDetail(currentIdx);
+}
+
+/* ── SIDEBAR ── */
+function renderSidebar() {
+  const list = document.getElementById('gerakanList');
+  list.innerHTML = DB.gerakan.map((g, i) => `
+    <li>
+      <button class="gerakan-item ${i === currentIdx ? 'active' : ''} ${done.has(i) ? 'done' : ''}"
+        onclick="goto(${i})">
+        <span class="num">${g.urutan}</span>
+        <span class="label">${g.emoji} ${g.nama}</span>
+        <span class="check">✓</span>
+      </button>
+    </li>
+  `).join('');
+}
+
+/* ── DETAIL ── */
+function renderDetail(idx) {
+  const g = DB.gerakan[idx];
+  const isAnak = mode === 'anak';
+  const desc = isAnak ? g.deskripsi_anak : g.deskripsi;
+
+  const bacaanHTML = g.bacaan.length === 0
+    ? `<div style="text-align:center;padding:20px;color:var(--slate);font-size:.85rem;opacity:.7">— Tidak ada bacaan khusus —</div>`
+    : g.bacaan.map((b, bi) => renderBacaan(b, bi, isAnak)).join('');
+
+  const videoBtn = g.video_url
+    ? `<button class="video-btn" onclick="toggleVideo(this, '${g.video_url}')">▶ Tonton Video</button>`
+    : '';
+
+  document.getElementById('detailCard').innerHTML = `
+    <div class="detail-hero">
+      <div class="step-badge">Gerakan ${g.urutan} dari ${DB.gerakan.length}</div>
+      <h2>${g.emoji} ${g.nama}</h2>
+      <p>${desc}</p>
+    </div>
+    <div class="detail-body">
+      <div class="anak-badge">🌟 Mode Anak-anak — Yuk belajar sholat!</div>
+
+      <div class="gerakan-visual">
+        <div class="figure-icon">${g.emoji}</div>
+        <div class="img-label">Gambar gerakan: ${g.nama}</div>
+        ${videoBtn}
+      </div>
+
+      <div class="video-embed" id="videoEmbed"></div>
+
+      ${bacaanHTML}
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="prev()" ${idx === 0 ? 'disabled' : ''}>◀ Sebelumnya</button>
+      <button class="autoplay-btn ${isAutoplaying ? 'active' : ''}" onclick="toggleAutoplay()" id="autoplayBtn">
+        ${isAutoplaying ? '⏹ Stop Autoplay' : '▶ Autoplay'}
+      </button>
+      <button class="nav-btn primary" onclick="next()" ${idx === DB.gerakan.length - 1 ? 'disabled' : ''}>Selanjutnya ▶</button>
+    </div>
+  `;
+
+  updateProgress();
+}
+
+function renderBacaan(b, bi, isAnak) {
+  const terjemahan = isAnak && b.terjemahan_anak ? b.terjemahan_anak : b.terjemahan;
+  return `
+    <div class="bacaan-section">
+      <div class="bacaan-header">
+        <span class="bac-title">📿 ${b.judul}</span>
+        <span class="sumber-tag">📚 ${b.sumber}</span>
+      </div>
+      <div class="bacaan-body">
+        <div class="arab-text">${b.teks_arab}</div>
+        <div class="latin-text">${b.teks_latin}</div>
+        <div class="terjemahan-text">🌐 <strong>Terjemahan:</strong> ${terjemahan}</div>
+        <div class="audio-player" id="audioPlayer${bi}" onclick="toggleAudio(${bi})">
+          <button class="play-btn" id="playBtn${bi}">▶</button>
+          <div class="audio-label">
+            Audio MP3: ${b.judul}
+            <div class="audio-note">${b.audio_url ? '' : '(File audio belum diupload — letakkan MP3 di folder /audio/)'}</div>
+          </div>
+          <div class="audio-waveform">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ── NAVIGATION ── */
+function goto(idx) {
+  done.add(currentIdx);
+  currentIdx = idx;
+  renderSidebar();
+  renderDetail(idx);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function next() {
+  if (currentIdx < DB.gerakan.length - 1) goto(currentIdx + 1);
+  else {
+    done.add(currentIdx);
+    showToast('🎉 Sholat selesai! Alhamdulillah.');
+    stopAutoplay();
+    updateProgress();
+    renderSidebar();
+  }
+}
+
+function prev() {
+  if (currentIdx > 0) goto(currentIdx - 1);
+}
+
+/* ── PROGRESS ── */
+function updateProgress() {
+  const total = DB.gerakan.length;
+  const count = done.size;
+  const pct = Math.round((count / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = count + ' / ' + total;
+}
+
+/* ── AUTOPLAY ── */
+function toggleAutoplay() {
+  isAutoplaying ? stopAutoplay() : startAutoplay();
+}
+function startAutoplay() {
+  isAutoplaying = true;
+  showToast('▶ Autoplay aktif — berpindah tiap 4 detik');
+  document.getElementById('autoplayBtn').textContent = '⏹ Stop Autoplay';
+  document.getElementById('autoplayBtn').classList.add('active');
+  autoplayInterval = setInterval(() => {
+    if (currentIdx < DB.gerakan.length - 1) {
+      next();
+    } else {
+      stopAutoplay();
+      showToast('✅ Autoplay selesai!');
+    }
+  }, 4000);
+}
+function stopAutoplay() {
+  isAutoplaying = false;
+  clearInterval(autoplayInterval);
+  const btn = document.getElementById('autoplayBtn');
+  if (btn) {
+    btn.textContent = '▶ Autoplay';
+    btn.classList.remove('active');
+  }
+}
+
+/* ── VIDEO ── */
+function toggleVideo(btn, url) {
+  const embed = document.getElementById('videoEmbed');
+  if (embed.classList.contains('show')) {
+    embed.classList.remove('show');
+    embed.innerHTML = '';
+    btn.textContent = '▶ Tonton Video';
+  } else {
+    embed.innerHTML = `<iframe width="100%" height="100%" src="${url}" frameborder="0" allowfullscreen style="border-radius:10px"></iframe>`;
+    embed.classList.add('show');
+    btn.textContent = '✕ Tutup Video';
+  }
+}
+
+/* ── AUDIO (simulasi) ── */
+let playingAudio = null;
+function toggleAudio(bi) {
+  const player = document.getElementById('audioPlayer' + bi);
+  const btn = document.getElementById('playBtn' + bi);
+  if (player.classList.contains('playing')) {
+    player.classList.remove('playing');
+    btn.textContent = '▶';
+    playingAudio = null;
+  } else {
+    if (playingAudio !== null) {
+      const old = document.getElementById('audioPlayer' + playingAudio);
+      const oldBtn = document.getElementById('playBtn' + playingAudio);
+      if (old) { old.classList.remove('playing'); oldBtn.textContent = '▶'; }
+    }
+    player.classList.add('playing');
+    btn.textContent = '⏸';
+    playingAudio = bi;
+    showToast('🔊 Memutar audio bacaan… (sambungkan file MP3)');
+    setTimeout(() => {
+      if (playingAudio === bi) {
+        player.classList.remove('playing');
+        btn.textContent = '▶';
+        playingAudio = null;
+      }
+    }, 5000);
+  }
+}
+
+/* ── MODE ── */
+function setMode(m) {
+  mode = m;
+  document.body.className = 'mode-' + m;
+  document.getElementById('btn-dewasa').classList.toggle('active', m === 'dewasa');
+  document.getElementById('btn-anak').classList.toggle('active', m === 'anak');
+  renderDetail(currentIdx);
+  showToast(m === 'anak' ? '🌟 Mode Anak-anak aktif!' : '👤 Mode Dewasa aktif!');
+}
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ── START ── */
+init();
+</script>
+</body>
+</html>
